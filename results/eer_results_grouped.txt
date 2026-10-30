@@ -1,0 +1,11 @@
+GROUPED HELD-OUT EVALUATION
+===========================
+
+Accuracy: 70.83%
+ROC-AUC: 94.29%
+EER: 12.14%
+EER Threshold: 0.0244
+
+Confusion Matrix:
+[[19  1]
+ [13 15]]

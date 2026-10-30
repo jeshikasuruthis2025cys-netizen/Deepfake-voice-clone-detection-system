@@ -1,0 +1,5 @@
+Deepfake Voice Detection Evaluation
+===================================
+ROC-AUC: 97.95%
+EER: 11.00%
+EER Threshold: 0.1219

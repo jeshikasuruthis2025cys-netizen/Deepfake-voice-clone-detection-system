@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VOICESEC - Deepfake Voice Security</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>VOICE<span>SEC</span></h2>
+            <p>Deepfake Voice Security</p>
+        </div>
+
+        <nav>
+
+            <a href="#voice-detection"
+               class="nav-link active">
+                Voice Detection
+            </a>
+
+            <a href="#speaker-verification"
+               class="nav-link">
+                Speaker Verification
+            </a>
+
+            <a href="#access-control"
+               class="nav-link">
+                Access Control
+            </a>
+
+            <a href="#system-results"
+               class="nav-link">
+                System Results
+            </a>
+
+        </nav>
+
+        <div class="system-status">
+
+            <p>SYSTEM STATUS</p>
+
+            <div>
+                <span class="online-dot"></span>
+                System Online
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main>
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div>
+
+                <h1>
+                    Deepfake Voice Security
+                </h1>
+
+                <p>
+                    AI-powered voice authentication and
+                    deepfake detection
+                </p>
+
+            </div>
+
+            <div class="active-badge">
+                ● SYSTEM ACTIVE
+            </div>
+
+        </header>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <p>MODEL ACCURACY</p>
+
+                <h2>70.83%</h2>
+
+                <small>
+                    Grouped held-out evaluation
+                </small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>ROC-AUC</p>
+
+                <h2>94.29%</h2>
+
+                <small>
+                    Detection performance
+                </small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>EER</p>
+
+                <h2>12.14%</h2>
+
+                <small>
+                    Equal Error Rate
+                </small>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <p>MODEL</p>
+
+                <h2>SVM</h2>
+
+                <small>
+                    MFCC + RBF SVM
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- VOICE DETECTION -->
+        <!-- ================================================= -->
+
+        <section
+            id="voice-detection"
+            class="dashboard-section">
+
+            <div class="analysis-container">
+
+                <!-- UPLOAD PANEL -->
+
+                <div class="panel">
+
+                    <h2>
+                        Voice Detection
+                    </h2>
+
+                    <p class="description">
+
+                        Upload a test voice and a reference
+                        voice. The system detects whether
+                        the test voice is REAL or AI-generated.
+
+                    </p>
+
+
+                    <!-- TEST VOICE -->
+
+                    <div class="upload-box">
+
+                        <label for="testAudio">
+                            Test Voice
+                        </label>
+
+                        <input
+                            type="file"
+                            id="testAudio"
+                            accept=".wav,audio/wav">
+
+                        <div
+                            id="testFileInfo"
+                            class="file-info">
+
+                            No file selected
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- REFERENCE VOICE -->
+
+                    <div class="upload-box">
+
+                        <label for="referenceAudio">
+                            Reference Voice
+                        </label>
+
+                        <input
+                            type="file"
+                            id="referenceAudio"
+                            accept=".wav,audio/wav">
+
+                        <div
+                            id="referenceFileInfo"
+                            class="file-info">
+
+                            No file selected
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ANALYZE BUTTON -->
+
+                    <button
+                        id="analyzeButton"
+                        class="analyze-button"
+                        onclick="analyzeVoice()">
+
+                        ANALYZE VOICE
+
+                    </button>
+
+                </div>
+
+
+                <!-- RESULT PANEL -->
+
+                <div
+                    class="panel"
+                    id="result">
+
+                    <div class="waiting">
+
+                        <div class="microphone">
+                            🎙️
+                        </div>
+
+                        <h3>
+                            Waiting for voice analysis
+                        </h3>
+
+                        <p>
+                            Upload both audio files and
+                            click Analyze Voice.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- SPEAKER VERIFICATION -->
+        <!-- ================================================= -->
+
+        <section
+            id="speaker-verification"
+            class="dashboard-section">
+
+            <div class="panel">
+
+                <h2>
+                    Speaker Verification
+                </h2>
+
+                <p class="description">
+
+                    Speaker verification checks whether
+                    the test voice belongs to the same
+                    speaker as the reference voice.
+
+                </p>
+
+
+                <div class="flow-container">
+
+                    <div class="flow-box">
+
+                        <strong>
+                            TEST VOICE
+                        </strong>
+
+                        <p>
+                            Uploaded voice
+                        </p>
+
+                    </div>
+
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+
+                    <div class="flow-box">
+
+                        <strong>
+                            ECAPA-TDNN
+                        </strong>
+
+                        <p>
+                            Speaker embedding
+                        </p>
+
+                    </div>
+
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+
+                    <div class="flow-box">
+
+                        <strong>
+                            COSINE SIMILARITY
+                        </strong>
+
+                        <p>
+                            Compare voices
+                        </p>
+
+                    </div>
+
+
+                    <div class="arrow">
+                        →
+                    </div>
+
+
+                    <div class="flow-box">
+
+                        <strong>
+                            MATCH / NO MATCH
+                        </strong>
+
+                        <p>
+                            Speaker decision
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="speakerResult"
+                    class="waiting">
+
+                    <div class="microphone">
+                        🔐
+                    </div>
+
+                    <h3>
+                        Speaker verification
+                    </h3>
+
+                    <p>
+                        Run voice analysis to see the
+                        speaker verification result.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- ACCESS CONTROL -->
+        <!-- ================================================= -->
+
+        <section
+            id="access-control"
+            class="dashboard-section">
+
+            <div class="panel">
+
+                <h2>
+                    Access Control
+                </h2>
+
+                <p class="description">
+
+                    Access is granted only when the voice
+                    is detected as REAL and the speaker
+                    matches the reference voice.
+
+                </p>
+
+
+                <div
+                    id="accessResult"
+                    class="waiting">
+
+                    <div class="microphone">
+                        🔒
+                    </div>
+
+                    <h3>
+                        Waiting for security decision
+                    </h3>
+
+                    <p>
+                        Run an analysis to generate
+                        the access-control decision.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- SYSTEM RESULTS -->
+        <!-- ================================================= -->
+
+        <section
+            id="system-results"
+            class="dashboard-section">
+
+            <div class="panel">
+
+                <h2>
+                    System Results
+                </h2>
+
+                <p class="description">
+
+                    Final evaluation metrics of the
+                    grouped held-out deepfake voice
+                    detection model.
+
+                </p>
+
+
+                <div class="result-item">
+
+                    <span>
+                        Accuracy
+                    </span>
+
+                    <strong>
+                        70.83%
+                    </strong>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <span>
+                        ROC-AUC
+                    </span>
+
+                    <strong>
+                        94.29%
+                    </strong>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <span>
+                        Equal Error Rate
+                    </span>
+
+                    <strong>
+                        12.14%
+                    </strong>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <span>
+                        Feature Extraction
+                    </span>
+
+                    <strong>
+                        MFCC
+                    </strong>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <span>
+                        Classifier
+                    </span>
+
+                    <strong>
+                        RBF SVM
+                    </strong>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <span>
+                        Speaker Model
+                    </span>
+
+                    <strong>
+                        ECAPA-TDNN
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================================================= -->
+        <!-- SECURITY FLOW -->
+        <!-- ================================================= -->
+
+        <section class="flow-panel">
+
+            <h2>
+                Security Flow
+            </h2>
+
+            <div class="flow-container">
+
+                <div class="flow-box">
+
+                    <strong>
+                        1. AUDIO INPUT
+                    </strong>
+
+                    <p>
+                        Test + Reference Voice
+                    </p>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+
+                <div class="flow-box">
+
+                    <strong>
+                        2. MFCC + SVM
+                    </strong>
+
+                    <p>
+                        Deepfake Detection
+                    </p>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+
+                <div class="flow-box">
+
+                    <strong>
+                        3. ECAPA-TDNN
+                    </strong>
+
+                    <p>
+                        Speaker Verification
+                    </p>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+
+                <div class="flow-box">
+
+                    <strong>
+                        4. DECISION
+                    </strong>
+
+                    <p>
+                        Grant / Deny
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            VOICESEC — Deepfake Voice Cloning Attack Detection
+
+            <br>
+
+            MFCC + SVM + ECAPA-TDNN
+
+        </footer>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="/script.js"></script>
+
+</body>
+
+</html>
